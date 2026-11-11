@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="zh-Hant"><head><meta charset="utf-8">
+<title>公車餐廳推薦提案解析</title>
+<style>
+:root{--navy:#123a6b;--blue:#1f6fb2;--teal:#0f8a7e;--orange:#e07a1f;--red:#c0392b;--ink:#1d2433;--mute:#5b6577;--line:#d3dbe7;--bg:#f2f6fb;--ok:#1e8e4e;--amber:#b9770e}
+*{box-sizing:border-box;margin:0;padding:0}
+body{width:1123px;height:794px;background:#fff;color:var(--ink);font-family:"Microsoft JhengHei","Noto Sans TC",sans-serif;font-size:11.5px;line-height:1.35;overflow:hidden}
+.e{font-family:"Segoe UI Emoji","Apple Color Emoji","Noto Color Emoji",sans-serif;font-style:normal}
+header{height:46px;background:var(--navy);color:#fff;display:flex;align-items:center;padding:0 14px;gap:12px}
+header h1{font-size:19px;white-space:nowrap}
+header .sub{font-size:10px;opacity:.9;border-left:1px solid rgba(255,255,255,.4);padding-left:10px;line-height:1.4}
+header .tag{margin-left:auto;background:var(--orange);padding:4px 8px;border-radius:5px;font-weight:700;font-size:11px;white-space:nowrap}
+main{display:grid;grid-template-columns:1.25fr 1.05fr 0.93fr;gap:8px;padding:8px;height:748px}
+.col{display:flex;flex-direction:column;gap:7px;min-height:0}
+.col section{flex:1 0 auto;display:flex;flex-direction:column}
+.col section>.pad{flex:1;align-content:center}
+section{border:1.5px solid var(--line);border-radius:7px;overflow:hidden}
+h2{display:flex;align-items:center;gap:6px;color:#fff;font-size:14px;padding:3px 8px;background:var(--navy)}
+h2 .n{background:#fff;color:var(--navy);border-radius:50%;width:19px;height:19px;display:inline-grid;place-items:center;font-size:12px;flex:none}
+.t h2{background:var(--teal)}.t h2 .n{color:var(--teal)}
+.o h2{background:var(--orange)}.o h2 .n{color:var(--orange)}
+.b h2{background:var(--blue)}.b h2 .n{color:var(--blue)}
+.pad{padding:6px 8px}
+.mute{color:var(--mute);font-size:9.5px}
+b.k{color:var(--navy)}
+/* ① */
+.goal{background:#fff7ee;border-left:4px solid var(--orange);border-radius:4px;padding:5px 7px;font-size:12px;line-height:1.45}
+.goal b{color:#a4520c}
+.trip{display:flex;justify-content:space-between;margin:6px 0 0;position:relative}
+.trip:before{content:"";position:absolute;left:14px;right:14px;top:16px;border-top:2.5px dashed #9fb3cc}
+.st{position:relative;text-align:center;width:46px;font-size:10px;line-height:1.15}
+.st .e{display:grid;place-items:center;width:32px;height:32px;margin:0 auto 2px;border-radius:50%;background:#fff;border:2px solid var(--blue);font-size:16px}
+.st.meal .e{border-color:var(--orange)}.st.close .e{border-color:var(--red)}
+.st b{display:block;color:var(--navy);font-size:11px}
+/* ② 比較表 */
+table{width:100%;border-collapse:separate;border-spacing:0 2px;font-size:11px}
+th{font-size:11px;color:#fff;padding:3px 5px;text-align:left}
+th.g{background:#6b7a90;border-radius:4px 0 0 4px}th.u{background:var(--teal);border-radius:0 4px 4px 0}th.q{background:none;color:var(--navy)}
+td{padding:3px 5px;vertical-align:middle;line-height:1.3}
+td.q{font-weight:700;color:var(--navy);white-space:nowrap}
+td.g{background:var(--bg);color:#4a5568}
+td.u{background:#e6f5f2;font-weight:700;color:#0b5f57}
+.bottom{margin-top:4px;background:var(--navy);color:#fff;border-radius:5px;padding:4px 7px;font-size:11.5px;line-height:1.4}
+.bottom b{color:#ffd08a}
+/* ③ 數據 */
+.stat{display:grid;grid-template-columns:repeat(4,1fr);gap:4px}
+.stat div{background:var(--navy);color:#fff;border-radius:5px;padding:4px 3px;text-align:center;font-size:10px;line-height:1.2}
+.stat b{display:block;font-size:15px;color:#ffd08a}
+/* gap */
+.gap{display:grid;grid-template-columns:1fr 14px 1fr;gap:3px;align-items:center;font-size:11px}
+.gap .a{background:var(--bg);border-radius:4px;padding:3px 6px;line-height:1.3}
+.gap .c{background:#fff1e3;border:1px solid #f2c391;border-radius:4px;padding:3px 6px;font-weight:700;line-height:1.3}
+.gap .ar{color:var(--orange);font-weight:800;text-align:center}
+.gap .hd{font-weight:700;color:var(--mute);font-size:10px;background:none;border:none;padding:0 2px}
+/* ④ 案例 */
+.qline{font-size:11.5px;margin-bottom:4px}
+.case{display:grid;grid-template-columns:44px 1fr 74px;gap:3px;font-size:11px;align-items:stretch}
+.case>div{background:var(--bg);border-radius:4px;padding:3px 5px;display:flex;flex-direction:column;justify-content:center;line-height:1.3}
+.case .nm{font-weight:800;color:var(--navy);font-size:13px;align-items:center}
+.case .res{color:#fff;font-weight:800;text-align:center;align-items:center;font-size:11.5px}
+.case .res small{font-weight:400;font-size:10px}
+.T{background:var(--ok)!important}.F{background:var(--red)!important}.U{background:var(--amber)!important}
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-top:4px;font-size:11px}
+.vs div{border-radius:4px;padding:3px 6px;text-align:center}
+/* ⑤ 架構 */
+.lbl{font-size:9.5px;font-weight:700;color:var(--mute);margin:1px 0}
+.lane{display:flex;align-items:center;gap:2px}
+.m{flex:1;border-radius:6px;padding:3px 1px;text-align:center;color:#fff;font-weight:700;font-size:10px;line-height:1.2;white-space:nowrap;letter-spacing:-.3px}
+.m .e{display:block;font-size:17px}
+.off{background:var(--teal)}.on{background:var(--blue)}.chk{background:var(--orange)}
+.arr{color:var(--mute);font-weight:800;font-size:10px}
+.split{display:flex;gap:4px;margin-top:4px}
+.split div{flex:1;border-radius:5px;padding:3px 6px;display:flex;align-items:center;gap:5px;font-size:11px;line-height:1.3}
+.split .e{font-size:20px}
+/* ⑥ TFU */
+.tfu{display:grid;grid-template-columns:44px repeat(3,1fr);gap:2px;font-size:11px}
+.tfu>div{background:var(--bg);border-radius:3px;padding:2px 5px}
+.tfu .h{color:#fff;font-weight:800;text-align:center}
+.tfu .r{font-weight:700;color:var(--navy);background:#fff}
+.agg{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:4px}
+.agg div{border-radius:5px;padding:3px;text-align:center;color:#fff;font-size:11px;line-height:1.25}
+/* 第三欄 */
+.af div{display:grid;grid-template-columns:58px 1fr;gap:5px;padding:3px 0;border-bottom:1px solid #e3e8f0;font-size:11px;line-height:1.3}
+.af b{color:var(--blue)}
+.af .w b{color:var(--red)}
+.rq div{border-left:4px solid var(--teal);background:var(--bg);border-radius:4px;padding:3px 6px;margin-bottom:3px;font-size:11px;line-height:1.3}
+.rq b{color:var(--teal)}
+.sub2{font-weight:800;color:var(--navy);font-size:11.5px;margin:3px 0 2px}
+.sub2:first-child{margin-top:0}
+.mind{counter-reset:m}
+.mind div{counter-increment:m;position:relative;padding:1px 0 1px 20px;font-size:11px}
+.mind div:before{content:counter(m);position:absolute;left:0;top:2px;width:15px;height:15px;border-radius:50%;background:var(--blue);color:#fff;display:grid;place-items:center;font-size:9.5px;font-weight:800}
+.deb div{font-size:11px;padding:1px 0}
+.deb .x{color:var(--orange);font-weight:800}
+.qs{display:flex;flex-wrap:wrap;gap:2px}
+.qs span{background:var(--bg);border-radius:3px;padding:0 4px;font-size:10px;color:var(--navy);font-weight:700}
+.qex{font-size:10.5px;background:#fff7ee;border-radius:4px;padding:3px 5px;margin-top:3px;line-height:1.35}
+</style></head><body>
+<header>
+  <h1>情境感知餐廳推薦 × 臺中公車　專題提案解析</h1>
+  <div class="sub">依據《期末專題提案作業規範》×《A2Z outline》<br>第四組｜Proposal Document・DESIGN.md・OpenSpec 規格</div>
+  <div class="tag">提案階段：尚未實作，無實驗結果</div>
+</header>
+<main>
+<!-- ===== 第一欄 ===== -->
+<div class="col">
+<section class="o">
+  <h2><span class="n">1</span>我們在研究什麼？</h2>
+  <div class="pad">
+    <div class="goal">從一堆<b>「氣氛適合」</b>的餐廳裡，用<b>真實公車時刻</b>自動算出：哪幾家<b>搭得到、吃得完、在預算內</b>；資料不夠時，誠實標<b>「不確定」</b>，不亂推薦。</div>
+    <div class="trip">
+      <div class="st"><i class="e">🏠</i><b>出發</b>19:00</div>
+      <div class="st"><i class="e">🚶</i><b>走到站</b>6 分</div>
+      <div class="st"><i class="e">🚏</i><b>候車</b>趕得上?</div>
+      <div class="st"><i class="e">🚌</i><b>乘車</b>20 分</div>
+      <div class="st"><i class="e">🔁</i><b>轉乘</b>接得上?</div>
+      <div class="st meal"><i class="e">🍽️</i><b>用餐</b>90 分</div>
+      <div class="st close"><i class="e">🔒</i><b>打烊</b>前離店?</div>
+    </div>
+  </div>
+</section>
+<section class="b">
+  <h2><span class="n">2</span>用 Google Maps 不就好了？</h2>
+  <div class="pad">
+    <table>
+      <tr><th class="q">要做的事</th><th class="g">Google Maps（自己來）</th><th class="u">本系統（自動做）</th></tr>
+      <tr><td class="q">找適合慶生的店</td><td class="g">搜關鍵字，自己讀評論</td><td class="u">語意檢索評論，附原文出處</td></tr>
+      <tr><td class="q">搭公車去得了嗎</td><td class="g">一次查一家店的路線</td><td class="u">每家候選店都算公車方案</td></tr>
+      <tr><td class="q">吃完會打烊嗎</td><td class="g">「營業中」看的是現在</td><td class="u">用到店時間＋用餐時間算</td></tr>
+      <tr><td class="q">價格／時間缺資料</td><td class="g">自己判斷</td><td class="u">標「不確定」，不當可行</td></tr>
+      <tr><td class="q">誰排第一</td><td class="g">評分、距離</td><td class="u">情境＋交通負擔一起排</td></tr>
+    </table>
+    <div class="bottom">差別不在資料比 Google 多，而在<b>把「選哪家」和「怎麼去、吃得完嗎」放進同一次判斷</b>。是否真的更好，由 RQ1–RQ4 驗證。</div>
+  </div>
+</section>
+<section class="t">
+  <h2><span class="n">3</span>為什麼值得做：臺中的數據</h2>
+  <div class="pad">
+    <div class="stat">
+      <div><b>22,612 家</b>餐飲業<br>10 年 +47.55%</div>
+      <div><b>239 條</b>市區<br>公車路線</div>
+      <div><b>約 680 萬</b>每月<br>公車人次</div>
+      <div><b>197 萬人</b>綁卡<br>10 km 免費</div>
+    </div>
+    <div class="mute" style="margin-top:3px">來源：臺中市主計處 2025；臺中市交通局議會專案報告 2026-03</div>
+  </div>
+</section>
+<section class="t">
+  <h2><span class="n">4</span>相關研究做到哪、缺什麼</h2>
+  <div class="pad">
+    <div class="gap">
+      <div class="hd">既有研究的限制</div><span></span><div class="hd">本專題的做法</div>
+      <div class="a">評論推薦：不管能否抵達</div><span class="ar">→</span><div class="c">先召回候選，再逐店查公車</div>
+      <div class="a">路線規劃：目的地已先選好</div><span class="ar">→</span><div class="c">交通結果回頭影響選店</div>
+      <div class="a">LLM 推薦：會推出不存在的店</div><span class="ar">→</span><div class="c">程式查核，說明只引用紀錄</div>
+      <div class="a">到站預測：一定有誤差</div><span class="ar">→</span><div class="c">有誤差與沒資料分開</div>
+    </div>
+    <div class="mute" style="margin-top:3px">文獻：AI 技術 9 篇＋領域知識 7 篇＋TDX 官方文件</div>
+  </div>
+</section>
+</div>
+
+<!-- ===== 第二欄 ===== -->
+<div class="col">
+<section class="o">
+  <h2><span class="n">5</span>實際例子：系統怎麼判斷（示意資料）</h2>
+  <div class="pad">
+    <div class="qline"><b class="k">需求：</b>「今晚慶生，每人 600 元內，19:00 從臺中火車站搭公車」→ 情境召回找到 3 家</div>
+    <div class="case">
+      <div class="nm">A 店</div><div>評價最好。轉乘 2 次，20:05 到；吃 90 分鐘到 21:35，但 <b>21:00 打烊</b></div><div class="res F">不通過<small>吃到一半打烊</small></div>
+      <div class="nm">B 店</div><div>一班直達，19:32 到；吃到 21:02，22:00 才打烊；套餐 480 元</div><div class="res T">推薦<small>全部條件通過</small></div>
+      <div class="nm">C 店</div><div>氣氛很適合，公車也可到，但<b>查不到價格</b></div><div class="res U">不確定<small>另列，請自行確認</small></div>
+    </div>
+    <div class="vs">
+      <div style="background:var(--bg)">只看評價：<b>A 排第一</b>（實際吃不完）</div>
+      <div style="background:#e6f5f2;color:#0b5f57"><b>本系統：推薦 B，C 標為待確認</b></div>
+    </div>
+  </div>
+</section>
+<section>
+  <h2><span class="n">6</span>系統架構：9 個模組</h2>
+  <div class="pad">
+    <div class="lbl">離線：事先建好餐廳資料庫</div>
+    <div class="lane">
+      <div class="m off"><i class="e">📹</i>1 蒐集美食影片</div><span class="arr">→</span>
+      <div class="m off"><i class="e">🏷️</i>2 抽出情境標籤</div><span class="arr">→</span>
+      <div class="m off"><i class="e">🗄️</i>3 存成向量＋圖譜</div>
+    </div>
+    <div class="lbl" style="margin-top:3px">線上：每次查詢依序執行</div>
+    <div class="lane">
+      <div class="m on"><i class="e">💬</i>4 理解需求</div><span class="arr">→</span>
+      <div class="m on"><i class="e">🔍</i>5 情境召回</div><span class="arr">→</span>
+      <div class="m on"><i class="e">💰</i>6 粗篩</div><span class="arr">→</span>
+      <div class="m on"><i class="e">🚌</i>7 公車方案</div><span class="arr">→</span>
+      <div class="m chk"><i class="e">🚦</i>8 查核排序</div><span class="arr">→</span>
+      <div class="m on"><i class="e">🏆</i>9 最多 3 間</div>
+    </div>
+    <div class="split">
+      <div style="background:#e9f1fb"><i class="e">🤖</i><span><b>LLM 只負責</b>：聽懂需求、寫推薦說明</span></div>
+      <div style="background:#fff1e3"><i class="e">🧮</i><span><b>程式負責</b>：時間計算、條件判斷、排序</span></div>
+    </div>
+  </div>
+</section>
+<section class="o">
+  <h2><span class="n">7</span>核心規則：每個條件判成三種結果</h2>
+  <div class="pad">
+    <div class="tfu">
+      <div></div><div class="h T">通過</div><div class="h F">不通過</div><div class="h U">不確定</div>
+      <div class="r">預算</div><div>最高價 ≤ 預算</div><div>最低價 &gt; 預算</div><div>查不到價格</div>
+      <div class="r">營業</div><div>吃完才打烊</div><div>吃到一半打烊</div><div>缺營業時間</div>
+      <div class="r">上車</div><div>走到站趕得上</div><div>都趕不上</div><div>到站時間不可靠</div>
+      <div class="r">轉乘</div><div>下車後接得上</div><div>接不上</div><div>只有班距資料</div>
+    </div>
+    <div class="agg">
+      <div class="T"><b>全部通過</b> → 推薦</div>
+      <div class="F"><b>任一不通過</b> → 排除</div>
+      <div class="U"><b>其餘</b> → 另列，不偷偷放寬</div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ===== 第三欄 ===== -->
+<div class="col">
+<section>
+  <h2><span class="n">8</span>Abstract 六段式 A–F</h2>
+  <div class="pad af">
+    <div><b>A 動機</b><span>臺中餐廳多，很多人搭公車去吃飯</span></div>
+    <div><b>B 問題</b><span>氣氛相符的店，不一定搭得到、吃得完</span></div>
+    <div><b>C 解法</b><span>考量公車便利性的情境推薦 Agent</span></div>
+    <div><b>D 方法</b><span>LLM 解析＋語意檢索＋TDX 公車資料＋三值查核</span></div>
+    <div><b>E 評估</b><span>RQ1–4 四組對照：檢索 Recall@K／nDCG@K、交通負擔、違反率＋覆蓋率、到站紀錄重播</span></div>
+    <div><b>F 預期</b><span>能說明情境依據與交通取捨的推薦原型</span></div>
+  </div>
+</section>
+<section class="t">
+  <h2><span class="n">9</span>研究問題 RQ1–RQ4（待驗證）</h2>
+  <div class="pad rq">
+    <div><b>RQ1</b> 用「語意」找店，是否比關鍵字更能找到適合慶生、約會的店？</div>
+    <div><b>RQ2</b> 選店時就加入公車條件，是否比選完才查路線更好？</div>
+    <div><b>RQ3</b> 多一個「不確定」，是否能減少把沒把握的店當成可行？</div>
+    <div><b>RQ4</b> 算到離店的完整時間，是否比只看出發時有沒有開更準？</div>
+  </div>
+</section>
+<section class="b">
+  <h2><span class="n">10</span>深度研究：5 思維・3 爭論・10 問</h2>
+  <div class="pad">
+    <div class="sub2">Q1 五個核心思維</div>
+    <div class="mind">
+      <div>先問「能不能去」，再比「喜不喜歡」</div>
+      <div>看到店到離店，不看查詢當下</div>
+      <div>預測有誤差 ≠ 沒有資料</div>
+      <div>每句推薦理由都找得到出處</div>
+      <div>同一家店，出發地不同難度就不同</div>
+    </div>
+    <div class="sub2">Q2 三個爭論與取捨</div>
+    <div class="deb">
+      <div>時刻表 <span class="x">vs</span> 即時資訊 → 班表找候選，即時資料查核</div>
+      <div>最快到 <span class="x">vs</span> 留緩衝 → 緩衝當參數，並告知使用者</div>
+      <div>LLM 規劃 <span class="x">vs</span> 工具驗證 → LLM 解析，程式驗證</div>
+    </div>
+    <div class="sub2">Q3 十個深度問題</div>
+    <div class="qs"><span>Why</span><span>Failure</span><span>What-if</span><span>Trade-off</span><span>Evidence</span><span>Compare</span><span>Design</span><span>Real-world</span><span>Counter</span><span>Evaluate</span></div>
+    <div class="qex">例：18:50 到、19:00 打烊、吃 90 分鐘 → 到店時有開，但吃不完，判「不通過」</div>
+  </div>
+</section>
+</div>
+</main>
+</body></html>
