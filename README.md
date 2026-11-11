@@ -3,10 +3,6 @@
 **專題：考量臺中公車交通便利性的情境感知餐廳推薦 AI Agent**
 （Context-Aware Restaurant Recommendation with Taichung Bus Accessibility）
 
-- 姓名：葉純宇
-- 學號：5115056044
-- 課程：物聯網應用與資料分析（個人作業 DIC3）
-
 > 提案階段，尚未實作，沒有實驗結果。文中所有成效都是預期成果。
 
 ## 摘要（約 300 字）
